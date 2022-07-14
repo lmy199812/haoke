@@ -1,12 +1,12 @@
 @font-face {
-  font-family: "iconfont"; /* Project id 3520448 */
-  src: url('iconfont.woff2?t=1657711029080') format('woff2'),
-       url('iconfont.woff?t=1657711029080') format('woff'),
-       url('iconfont.ttf?t=1657711029080') format('truetype');
+  font-family: "haoke"; /* Project id 3520448 */
+  src: url('iconfont.woff2?t=1657781020699') format('woff2'),
+       url('iconfont.woff?t=1657781020699') format('woff'),
+       url('iconfont.ttf?t=1657781020699') format('truetype');
 }
 
-.iconfont {
-  font-family: "iconfont" !important;
+.haoke {
+  font-family: "haoke" !important;
   font-size: 16px;
   font-style: normal;
   -webkit-font-smoothing: antialiased;

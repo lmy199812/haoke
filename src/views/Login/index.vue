@@ -48,8 +48,16 @@ export default {
       console.log('submit', values)
     },
     async login() {
-      const res = await login(this.username, this.password)
-      console.dir(res)
+      try {
+        const res = await login(this.username, this.password)
+        console.log('登录成功', res)
+      } catch (err) {
+        if (err.response.status === 400) {
+          console.log('登录失败', err)
+        } else {
+          console.log('登录错误，请稍后重试', err)
+        }
+      }
     }
   }
 }
