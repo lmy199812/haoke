@@ -36,6 +36,42 @@ const routes = [
         path: '/my',
         name: 'my',
         component: () => import('@/views/My')
+      },
+      {
+        path: '/fujian',
+        name: 'fujian',
+        component: () => import('@/components/FuJian'),
+        children: [
+          {
+            path: '/collection',
+            name: 'collection',
+            component: () => import('@/views/Collection')
+          },
+          {
+            path: '/lease',
+            name: 'lease',
+            component: () => import('@/views/Lease')
+          },
+          {
+            path: '/recode',
+            name: 'recode',
+            component: () => import('@/views/Recode')
+          }, {
+            path: '/homeone',
+            name: 'homeone',
+            component: () => import('@/views/Homeone')
+          },
+          {
+            path: '/personal',
+            name: 'personal',
+            component: () => import('@/views/Personal')
+          }, {
+            path: '/contact',
+            name: 'contact',
+            component: () => import('@/views/Contact')
+          }
+        ]
+
       }
 
     ]

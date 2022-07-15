@@ -14,14 +14,14 @@
         v-model="username"
         name="username"
         placeholder="请输入账号"
-        :rules="[{ required: true, message: '请输入账号' }]"
+        :rules="usernameRules"
       />
       <van-field
         v-model="password"
         type="password"
         name="密码"
         placeholder="请输入密码"
-        :rules="[{ required: true, message: '请输入密码' }]"
+        :rules="passwordRules"
       />
       <div style="margin: 16px">
         <van-button block type="info" native-type="submit">登录</van-button>
@@ -33,11 +33,14 @@
 
 <script>
 import { login } from '@/api/user'
+import { usernameRules, passwordRules } from './rules'
 export default {
   data() {
     return {
       username: '',
-      password: ''
+      password: '',
+      usernameRules,
+      passwordRules
     }
   },
   methods: {
@@ -48,9 +51,16 @@ export default {
       console.log('submit', values)
     },
     async login() {
+      this.$toast.loading({
+        message: '加载中,请稍等...',
+        duration: 2000
+      })
       try {
         const res = await login(this.username, this.password)
-        console.log('登录成功', res)
+        // console.log('登录成功', res)
+        this.$store.commit('setUser', res.data.body)
+        this.$router.push('/my')
+        this.$toast.success('登录成功')
       } catch (err) {
         if (err.response.status === 400) {
           console.log('登录失败', err)
