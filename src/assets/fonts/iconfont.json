@@ -6,6 +6,20 @@
   "description": "好客",
   "glyphs": [
     {
+      "icon_id": "630083",
+      "name": "下拉",
+      "font_class": "xiala",
+      "unicode": "e65c",
+      "unicode_decimal": 58972
+    },
+    {
+      "icon_id": "722304",
+      "name": "双人",
+      "font_class": "shuangren",
+      "unicode": "e605",
+      "unicode_decimal": 58885
+    },
+    {
       "icon_id": "201226",
       "name": "3.1首页",
       "font_class": "31shouye",

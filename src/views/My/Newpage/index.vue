@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <h2>联系我们</h2>
-  </div>
+  <div>单独的小件</div>
 </template>
 
 <script>

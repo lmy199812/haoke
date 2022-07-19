@@ -1,5 +1,5 @@
 <template>
-  <div class="layout-container">
+  <div class="layout-container" route>
     <van-tabbar v-model="active" class="layout-tabbar">
       <van-tabbar-item to="/home"
         ><i slot="icon" class="haoke hk31shouye"> </i>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>看放记录</h2>
+    <h2>地图</h2>
   </div>
 </template>
 

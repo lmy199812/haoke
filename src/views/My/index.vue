@@ -1,14 +1,14 @@
 <template>
   <div class="my-container">
-    <div class="header" v-if="user">
+    <div class="header" v-if="isLogin">
       <img class="img-bg" src="~@/assets/avatar (1).png" alt="" />
       <div class="my-box">
         <div class="my-pic">
-          <img class="img-bg" src="../../assets/avatar.png" alt="" />
+          <img class="img-bg" :src="`${userUrl}${userInfo.avatar}`" alt="" />
         </div>
         <div class="my-info">
           <div class="my-user">
-            <div class="my-name">好客_845296</div>
+            <div class="my-name">{{ userInfo.nickname }}</div>
             <div class="my-btn">
               <van-button type="primary" @click="logOut">退出</van-button>
             </div>
@@ -42,33 +42,17 @@
         <van-grid-item
           icon="star-o"
           text="我的收藏"
-          @click="$router.push('collection')"
+          @click="toCollection"
         ></van-grid-item>
         <van-grid-item
           icon="wap-home-o"
-          @click="$router.push('/lease')"
           text="我的出租"
+          @click="toMyrent"
         ></van-grid-item>
-        <van-grid-item
-          icon="underway-o"
-          @click="$router.push('/recode')"
-          text="看房记录"
-        ></van-grid-item>
-        <van-grid-item
-          icon="newspaper-o"
-          @click="$router.push('/homeone')"
-          text="成为房主"
-        ></van-grid-item>
-        <van-grid-item
-          icon="user-o"
-          @click="$router.push('/personal')"
-          text="个人资料"
-        ></van-grid-item>
-        <van-grid-item
-          icon="service-o"
-          @click="$router.push('/contact')"
-          text="联系我们"
-        ></van-grid-item>
+        <van-grid-item icon="underway-o" text="看房记录"></van-grid-item>
+        <van-grid-item icon="newspaper-o" text="成为房主"></van-grid-item>
+        <van-grid-item icon="user-o" text="个人资料"></van-grid-item>
+        <van-grid-item icon="service-o" text="联系我们"></van-grid-item>
       </van-grid>
     </div>
     <div class="foot">
@@ -79,15 +63,24 @@
 
 <script>
 import store from '@/store'
-import { mapState } from 'vuex'
+// import { mapState } from 'vuex'
+import { getUserInfo } from '@/api'
 export default {
   data() {
     return {
-      store
+      store,
+      userInfo: [],
+      userUrl: 'http://liufusong.top:8080'
     }
   },
   computed: {
-    ...mapState(['user'])
+    // ...mapState(['user']),
+    isLogin() {
+      return !!this.$store.state.user.token
+    }
+  },
+  created() {
+    this.getUserInfo()
   },
   methods: {
     logOut() {
@@ -97,11 +90,37 @@ export default {
           message: '是否确定退出'
         })
         .then(() => {
-          this.$store.commit('setUser', null)
+          this.$store.commit('setUser', {})
         })
         .catch(() => {
           console.log('取消')
         })
+    },
+    async getUserInfo() {
+      if (this.isLogin) {
+        try {
+          const { data } = await getUserInfo()
+          this.userInfo = data.body
+          console.log(this.userInfo)
+        } catch (err) {
+          this.$toast.fail('获取数据失败', err)
+          console.log(err)
+        }
+      }
+    },
+    toCollection() {
+      if (this.isLogin === true) {
+        this.$router.push('/collection')
+      } else {
+        this.$router.push('/login')
+      }
+    },
+    toMyrent() {
+      if (this.isLogin === true) {
+        this.$router.push('/myrent')
+      } else {
+        this.$router.push('/login')
+      }
     }
   }
 }

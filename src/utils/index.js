@@ -1,1 +1,1 @@
-export * from '@/utils/auth'
+export * from './auth'
